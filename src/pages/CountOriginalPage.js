@@ -1,89 +1,53 @@
 import React, { useState }  from 'react'
 import 'bulma/css/bulma.min.css';
-import { Container, Columns, Hero, Heading, Image, Button, Notification } from 'react-bulma-components';
+import { Columns, Button, Modal, Heading} from 'react-bulma-components';
+import CountCard from '../components/CountCard';
+import { Link } from "react-router-dom";
 
 function CountOriginalPage() {
-    const [counter, setCounter] = useState(0);
+    const [whiteCounter, setWhiteCounter] = useState(0);
+    const [pinkCounter, setPinkCounter] = useState(0);
+    const [greenCounter, setGreenCounter] = useState(0);
 
-    const incrementCount = () => {
-        setCounter(counter+1)
-    };
+    const [saveScreen, setSaveScreen] = useState(false); 
 
-    const decreaseCounter = () => {
-        if (counter > 0) {
-            setCounter(counter-1)
-        }
+    const onNext = () => {
+        console.log("Clicked save")
+        setSaveScreen(true);
     };
 
     return (
         <div>
             <Columns gap={0}>
                 <Columns.Column>
-                    <Hero color={"primary"} className="is-fullheight" textAlign={"center"}>
-                        <Hero.Header>
-                            Header
-                        </Hero.Header>
-                        <Hero.Body>
-                            <Container>
-                                <Image src="/assets/car_white_original.jpeg" />
-                                <Columns>
-                                    <Columns.Column>
-                                        <Button color="dark" onClick={() => decreaseCounter()} disabled={counter<1}>-</Button>
-                                    </Columns.Column>
-                                    <Columns.Column>
-                                        <Heading weight={"bold"}>
-                                            {counter}
-                                        </Heading>
-                                    </Columns.Column>
-                                    <Columns.Column>
-                                        <Button color="dark" onClick={() => incrementCount()}>+</Button>
-                                    </Columns.Column>
-                                </Columns>
-                                
-                            </Container>
-                        </Hero.Body>
-                        <Hero.Footer>
-                            Footer
-                        </Hero.Footer>
-                    </Hero>
+                    <CountCard background={"primary"} image={"/assets/car_white_original.png"} onChange={(e)=>setWhiteCounter(e)} alignHeader={"left"} header={<Button renderAs={Link} to="/" color="danger">Cancel</Button>}/>
                 </Columns.Column>
                     
                 <Columns.Column>
-                    <Hero color={"danger"} className="is-fullheight" textAlign={"center"}>
-                        <Hero.Header>
-                            Header
-                        </Hero.Header>
-                        <Hero.Body>
-                            <Container>
-                                <Heading>
-                                    hero title
-                                </Heading>
-                            </Container>
-                        </Hero.Body>
-                        <Hero.Footer>
-                            Footer
-                        </Hero.Footer>
-                    </Hero>
+                    <CountCard background={"danger"} image={"/assets/car_pink_original.png"} onChange={(e)=>setPinkCounter(e)}/>
                 </Columns.Column>
 
                 <Columns.Column>
-                    <Hero color={"warning"} className="is-fullheight" textAlign={"center"}>
-                        <Hero.Header>
-                            Header
-                        </Hero.Header>
-                        <Hero.Body>
-                            <Container>
-                                <Heading>
-                                    hero title
-                                </Heading>
-                            </Container>
-                        </Hero.Body>
-                        <Hero.Footer>
-                            Footer
-                        </Hero.Footer>
-                    </Hero>
+                    <CountCard background={"warning"} image={"/assets/car_green_original.png"} onChange={(e)=>setGreenCounter(e)} alignHeader={"right"} header={<Button onClick={() => onNext()}color="primary">Next</Button>}/>
                 </Columns.Column>
             </Columns>
+
+            <Modal title="Save.." show={saveScreen} onClose={() => setSaveScreen(false)}>
+                <Modal.Card >
+                    <Modal.Card.Header>
+                        <Modal.Card.Title>Save the results?</Modal.Card.Title>
+                    </Modal.Card.Header>
+                    <Modal.Card.Body>
+                        <Heading size={6}>White: {whiteCounter}</Heading>
+                        <Heading size={6}>Pink: {pinkCounter}</Heading>
+                        <Heading size={6}>Green: {greenCounter}</Heading>
+                    </Modal.Card.Body>
+                    <Modal.Card.Footer>
+                        <Button color="primary">Save</Button>
+                    </Modal.Card.Footer>
+                </Modal.Card>
+            </Modal>
+
         </div>
     )
 }
