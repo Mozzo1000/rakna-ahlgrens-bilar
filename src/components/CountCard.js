@@ -20,7 +20,7 @@ function CountCard(props) {
     return (
         <div>
             <Hero color={props.background} className="is-fullheight" textAlign={"center"}>
-                <Hero.Header textAlign={props.alignHeader}>
+                <Hero.Header textAlign={props.alignHeader} m={3}>
                     {props.header}
                 </Hero.Header>
                 <Hero.Body>
