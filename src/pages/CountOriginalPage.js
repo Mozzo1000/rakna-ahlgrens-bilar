@@ -24,7 +24,7 @@ function CountOriginalPage() {
                 </Columns.Column>
                     
                 <Columns.Column>
-                    <CountCard background={"danger"} image={"/assets/car_pink_original.png"} onChange={(e)=>setPinkCounter(e)}/>
+                    <CountCard background={"danger"} image={"/assets/car_pink_original.png"} header={<Button invisible/>} onChange={(e)=>setPinkCounter(e)}/>
                 </Columns.Column>
 
                 <Columns.Column>
